@@ -43,7 +43,8 @@ define iptables::ipv6::rule ( $options = undef, $defaults = undef ) {
   # TODO: pretty sure the following line is a bug preventing IPv6 chains other
   #       than the ADMIN and INPUT chain. Nobody has complained though, so
   #       maybe I'm forgetting while we need this?
-  if ! $chain =~  /^(ADMIN|INPUT)$/ { fail( "chain - ${chain}") }
+  # Fix for github issue #23
+  if $chain !~  /^(ADMIN|INPUT)$/ { fail( "chain - ${chain}") }
   $chain_order_arr = member( $builtin, $chain ) ? {
     true    => [ $order['chain'][$chain], $chain ],
     default => [ $order['chain']['other'], $chain ],
