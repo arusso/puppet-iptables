@@ -19,7 +19,6 @@ class iptables (
   $ip6tables_file = 'UNSET',
   $version = 'UNSET',
 ) {
-  include concat::setup
 
   ##############################################################################
   # Parameter Validation
